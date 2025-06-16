@@ -4,6 +4,31 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		int n = scan.nextInt();
+		Transport[] arr = new Transport[n];
+
+		for (int i = 0; i < n; i++) {
+			switch (scan.nextInt()) {
+				case 1 -> {
+					arr[i] = new Lorry(scan.nextDouble());
+				}
+				case 2 -> {
+					arr[i] = new Ship(scan.nextDouble());
+				}
+			}
+		}
+
+		double weight = scan.nextDouble();
+		for (int i = 0; i < n; i++) {
+			if (arr[i].canCarry(weight)) {
+				arr[i].add(weight);
+			}
+			System.out.println(arr[i]);
+		}
+	}
+
+	public static void shapeWork() {
+		Scanner scan = new Scanner(System.in);
+		int n = scan.nextInt();
 		IShape[] arr = new IShape[n];
 
 		for (int i = 0; i < n; i++) {
