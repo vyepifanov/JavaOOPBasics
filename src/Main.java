@@ -1,7 +1,68 @@
+import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		String product = scan.nextLine();
+
+		Cook cook = new Cook();
+		cook.turnOvenOn();
+
+		try {
+			cook.bake(product);
+			System.out.println("Блюдо готово");
+		} catch (BakingException exc) {
+			System.out.println("Блюдо полностью испортилось: " + exc.getMessage());
+			return;
+		} finally {
+			cook.turnOvenOff();
+		}
+	}
+
+	public static void arrIndexExc() {
+		Scanner scan = new Scanner(System.in);
+		int seed = scan.nextInt();
+		Random gen = new Random(seed);
+
+		int n = gen.nextInt(1, 11);
+		int[] arr = new int[n];
+
+		int idx;
+		int value;
+		for (int i = 0; i < 3; i++) {
+			try {
+				idx = scan.nextInt();
+				value = scan.nextInt();
+
+				arr[idx] = value;
+			} catch (ArrayIndexOutOfBoundsException exc) {
+				System.out.println("Индекс не попал в массив");
+			}
+		}
+
+		System.out.println(Arrays.toString(arr));
+	}
+
+	public static void negArrayExc() {
+		Scanner scan = new Scanner(System.in);
+		int seed = scan.nextInt();
+		Random gen = new Random(seed);
+
+		int n = gen.nextInt(-10, 11);
+		try {
+			int[] arr = new int[n];
+			for (int i = 0; i < n; i++) {
+				arr[i] = i;
+			}
+			System.out.println(Arrays.toString(arr));
+		} catch (NegativeArraySizeException exc) {
+			System.out.println("Неверный размер массива: " + n);
+		}
+	}
+
+	public static void transportWork() {
 		Scanner scan = new Scanner(System.in);
 		int n = scan.nextInt();
 		Transport[] arr = new Transport[n];
