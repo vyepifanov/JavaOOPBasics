@@ -1,9 +1,81 @@
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		int[] arr;
+
+		while (true) {
+			try {
+				arr = new int[scan.nextInt()];
+				break;
+			} catch (InputMismatchException exc) {
+				System.out.println("Размер массива должен быть целым числом!");
+				scan.next();
+			} catch (NegativeArraySizeException exc) {
+				System.out.println("Введите положительный размер массива!");
+			}
+		}
+
+		for (int i = 0; i < arr.length; i++) {
+			try {
+				arr[i] = scan.nextInt();
+			} catch (InputMismatchException exc) {
+				arr[i] = 0;
+				scan.next();
+			}
+		}
+
+		int idx = scan.nextInt();
+		try {
+			System.out.printf("Извлечено из массива: %d%n", arr[idx]);
+		} catch (ArrayIndexOutOfBoundsException exc) {
+			System.out.println("Неверный индекс!");
+		}
+		System.out.println(Arrays.toString(arr));
+	}
+
+	public void lugExceptionExample() {
+		Scanner scan = new Scanner(System.in);
+		double w = scan.nextDouble();
+
+		Luggage lug = new Luggage(10.0);
+
+		System.out.println("Надо пройти регистрацию на рейс");
+		try {
+			lug.checkLuggage(w);
+			System.out.println("Доплата за вес не нужна");
+		} catch (HeavyLuggageException exc) {
+			System.out.println(exc.getMessage());
+			System.out.println("Нужно оплатить превышение веса по тарифу");
+			return;
+		} finally {
+			System.out.println("Регистрация пройдена");
+		}
+	}
+
+	public void carsExceptionExample() {
+		Scanner scan = new Scanner(System.in);
+		byte n = scan.nextByte();
+
+		System.out.println("Приехали на парковку");
+		Parking parking = new Parking((byte)10);
+		try {
+			parking.check(n);
+			System.out.println("Припарковались");
+		} catch (TooManyCarsException exc) {
+			System.out.println("Вся парковка занята. Свободных мест нет.");
+			System.out.println("Припарковались в другом месте");
+			return;
+		} finally {
+			System.out.println("Выходим из машин");
+		}
+	}
+
+	public void bakeExceptionExample() {
 		Scanner scan = new Scanner(System.in);
 		String product = scan.nextLine();
 
