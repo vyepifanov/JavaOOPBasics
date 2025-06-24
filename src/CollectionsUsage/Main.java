@@ -1,13 +1,81 @@
 package CollectionsUsage;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Collections;
+import java.util.*;
 
 public class Main {
 	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		Garage garage = new Garage(Integer.parseInt(scan.next()));
+
+		while (scan.hasNext()) {
+			int action = scan.nextInt();
+			try {
+				switch (action) {
+					case 1 -> {
+						String brand = scan.next();
+						double volume = scan.nextDouble();
+						int box = scan.nextInt();
+
+						Car car = new Car(brand, volume);
+						if (garage.isFree(box)) {
+							garage.putCar(car, box);
+						} else {
+							int freeBox = garage.getFreeBoxnumber();
+							if (freeBox > 0) {
+								garage.putCar(car, freeBox);
+							}
+						}
+					}
+					case 2 -> {
+						int box = scan.nextInt();
+						if (box < 1 || box > garage.getCapacity() || garage.isFree(box)) {
+							System.out.println("ERROR");
+						} else {
+							System.out.println(garage.getCar(box));
+						}
+					}
+					case 3 -> {
+						System.out.println("----------------");
+						for (Car car : garage) {
+							System.out.println(car);
+						}
+						System.out.println("----------------");
+					}
+					case 4 -> {
+						return;
+					}
+					default -> {
+						return;
+					}
+				};
+			} catch (ErrorBoxException exc) {}
+		}
+	}
+
+	public void rangeIteration() {
+		Scanner scan = new Scanner(System.in);
+		int a = scan.nextInt();
+		int b = scan.nextInt();
+		Range r = new Range(a, b);
+
+		for (Integer item : r) {
+			System.out.print(item + " ");
+		}
+	}
+
+	public void reverseArr() {
+		Scanner scan = new Scanner(System.in);
+		int[] array = new int[scan.nextInt()];
+		for (int i = 0; i < array.length; i++) {
+			array[i] = scan.nextInt();
+		}
+		ReverseArray reverse = new ReverseArray(array);
+		for (Integer item : reverse) {
+			System.out.print(item + " ");
+		}
+	}
+
+	public void commentSort() {
 		Scanner scan = new Scanner(System.in);
 		scan.useDelimiter(";|\n");
 
