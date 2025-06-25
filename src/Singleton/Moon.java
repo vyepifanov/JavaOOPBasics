@@ -1,4 +1,4 @@
-package Patterns;
+package Singleton;
 
 public class Moon implements CelestialBody {
 	private static Moon uniqueInstance;

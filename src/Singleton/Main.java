@@ -1,4 +1,4 @@
-package Patterns;
+package Singleton;
 
 import java.util.Scanner;
 

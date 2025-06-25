@@ -1,4 +1,4 @@
-package Patterns;
+package Singleton;
 
 public class Earth implements CelestialBody {
 	private static Earth uniqueInstance;

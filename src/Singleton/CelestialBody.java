@@ -1,4 +1,4 @@
-package Patterns;
+package Singleton;
 
 public interface CelestialBody {
 }

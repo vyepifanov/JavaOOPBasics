@@ -1,4 +1,4 @@
-package Patterns;
+package Singleton;
 
 public class Sun implements CelestialBody {
 	private static Sun uniqueInstance;
